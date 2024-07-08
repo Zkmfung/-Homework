@@ -1,9 +1,4 @@
-"""
-本代码由[Tkinter布局助手]生成
-官网:https://www.pytk.net
-QQ交流群:905019785
-在线反馈:https://support.qq.com/product/618914
-"""
+
 import random
 from tkinter import *
 from tkinter.ttk import *
@@ -15,6 +10,10 @@ class WinGUI(Toplevel):
     def __init__(self):
         super().__init__()
         self.__win()
+        self.tk_button_city = self.__tk_button_city(self)
+        self.tk_button_train = self.__tk_button_train(self)
+        self.tk_button_plane = self.__tk_button_plane(self)
+        self.tk_button_return_to_mm = self.__tk_button_return_to_mm(self)
 
     def __win(self):
         self.title("城市交通咨询系统（管理员）")
@@ -73,6 +72,26 @@ class WinGUI(Toplevel):
         widget.configure(style=ctl)
         return ctl
 
+    def __tk_button_city(self, parent):
+        btn = Button(parent, text="城市", takefocus=False, bootstyle="default outline")
+        btn.place(relx=0.4063, rely=0.1371, relwidth=0.1891, relheight=0.1405)
+        return btn
+
+    def __tk_button_train(self, parent):
+        btn = Button(parent, text="火车", takefocus=False, bootstyle="default outline")
+        btn.place(relx=0.4063, rely=0.3645, relwidth=0.1891, relheight=0.1405)
+        return btn
+
+    def __tk_button_plane(self, parent):
+        btn = Button(parent, text="飞机", takefocus=False, bootstyle="default outline")
+        btn.place(relx=0.4063, rely=0.6087, relwidth=0.1891, relheight=0.1405)
+        return btn
+
+    def __tk_button_return_to_mm(self, parent):
+        btn = Button(parent, text="返回主菜单", takefocus=False, bootstyle="default")
+        btn.place(relx=0.4295, rely=0.8328, relwidth=0.1426, relheight=0.1003)
+        return btn
+
 
 class Win(WinGUI):
     def __init__(self, controller):
@@ -83,10 +102,18 @@ class Win(WinGUI):
         self.ctl.init(self)
 
     def __event_bind(self):
+        self.tk_button_city.bind('<Button>', self.ctl.city)
+        self.tk_button_train.bind('<Button>', self.ctl.train)
+        self.tk_button_plane.bind('<Button>', self.ctl.plane)
+        self.tk_button_return_to_mm.bind('<Button>', self.ctl.mainmenu)
         pass
 
     def __style_config(self):
         sty = Style()
+        sty.configure(self.new_style(self.tk_button_city), font=("微软雅黑", -12))
+        sty.configure(self.new_style(self.tk_button_train), font=("微软雅黑", -12))
+        sty.configure(self.new_style(self.tk_button_plane), font=("微软雅黑", -12))
+        sty.configure(self.new_style(self.tk_button_return_to_mm), font=("微软雅黑", -12))
         pass
 
 

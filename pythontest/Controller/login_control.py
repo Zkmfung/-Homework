@@ -6,7 +6,7 @@ from Controller.admin_info_control import Controller as a_info_Controller
 from Views.user_info_ui import Win as u_info_Win
 from Controller.user_info_control import Controller as u_info_Controller
 class Controller:
-    # 导入UI类后，替换以下的 object 类型，将获得 IDE 属性提示功能
+
     ui: object
 
     def __init__(self):
@@ -21,9 +21,12 @@ class Controller:
 
     def admin_login(self, evt):
         print("登录成功！", evt)
-        a_info = a_info_Win(a_info_Controller())
+        a_info = a_info_Win(a_info_Controller(login_ui = self.ui))
         a_info.mainloop()
+        self.ui.withdraw()
     def user_login(self, evt):
         print("你好", evt)
-        u_info = u_info_Win(u_info_Controller())
+        u_info = u_info_Win(u_info_Controller(login_ui = self.ui))
         u_info.mainloop()
+        self.ui.withdraw()
+
