@@ -9,15 +9,15 @@ class WinGUI(Toplevel):
     def __init__(self):
         super().__init__()
         self.__win()
-        self.tk_input_lye5lfdi = self.__tk_input_cityname(self)
-        self.tk_button_lye5ljxy = self.__tk_button_lye5ljxy(self)
-        self.tk_button_lye5lzja = self.__tk_button_lye5lzja(self)
+        self.tk_button_return_to_mm = self.__tk_button_return_to_mm(self)
+        self.tk_label_frame_vt = self.__tk_label_frame_vt(self)
+        self.tk_table_listCity = self.__tk_table_listCity(self.tk_label_frame_vt)
 
     def __win(self):
         self.title("城市交通咨询系统（管理员）")
         # 设置窗口大小、居中
-        width = 377
-        height = 161
+        width = 603
+        height = 299
         screenwidth = self.winfo_screenwidth()
         screenheight = self.winfo_screenheight()
         geometry = '%dx%d+%d+%d' % (width, height, (screenwidth - width) / 2, (screenheight - height) / 2)
@@ -70,20 +70,27 @@ class WinGUI(Toplevel):
         widget.configure(style=ctl)
         return ctl
 
-    def __tk_input_cityname(self, parent):
-        ipt = Entry(parent, bootstyle="default")
-        ipt.place(relx=0.3024, rely=0.0994, relwidth=0.3979, relheight=0.1863)
-        return ipt
-
-    def __tk_button_lye5ljxy(self, parent):
-        btn = Button(parent, text="添加", takefocus=False, bootstyle="default")
-        btn.place(relx=0.4350, rely=0.3602, relwidth=0.1326, relheight=0.1863)
+    def __tk_button_return_to_mm(self, parent):
+        btn = Button(parent, text="返回上一页", takefocus=False, bootstyle="default")
+        btn.place(relx=0.4295, rely=0.8328, relwidth=0.1426, relheight=0.1003)
         return btn
 
-    def __tk_button_lye5lzja(self, parent):
-        btn = Button(parent, text="返回", takefocus=False, bootstyle="default")
-        btn.place(relx=0.3767, rely=0.6832, relwidth=0.2493, relheight=0.1863)
-        return btn
+    def __tk_label_frame_vt(self, parent):
+        frame = LabelFrame(parent, text="城市列表", bootstyle="default")
+        frame.place(relx=0.0000, rely=0.0000, relwidth=0.9934, relheight=0.7391)
+        return frame
+
+    def __tk_table_listCity(self, parent):
+        # 表头字段 表头宽度
+        columns = {"num": 109, "出发城市": 109, "到达城市": 109, "时刻": 218}
+        tk_table = Treeview(parent, show="headings", columns=list(columns), bootstyle="light")
+        for text, width in columns.items():  # 批量设置列属性
+            tk_table.heading(text, text=text, anchor='center')
+            tk_table.column(text, anchor='center', width=width, stretch=False)  # stretch 不自动拉伸
+
+        tk_table.place(relx=0.0451, rely=0.0679, relwidth=0.9115, relheight=0.7330)
+        self.create_bar(parent, tk_table, True, False, 27, 15, 546, 162, 599, 221)
+        return tk_table
 
 
 class Win(WinGUI):
@@ -95,14 +102,12 @@ class Win(WinGUI):
         self.ctl.init(self)
 
     def __event_bind(self):
-        self.tk_button_lye5ljxy.bind('<Button>', self.ctl.addC)
-        self.tk_button_lye5lzja.bind('<Button>', self.ctl.back_ti_acty)
+        self.tk_button_return_to_mm.bind('<Button>', self.ctl.bk_to_train)
         pass
 
     def __style_config(self):
         sty = Style()
-        sty.configure(self.new_style(self.tk_button_lye5ljxy), font=("微软雅黑", -12))
-        sty.configure(self.new_style(self.tk_button_lye5lzja), font=("微软雅黑", -12))
+        sty.configure(self.new_style(self.tk_button_return_to_mm), font=("微软雅黑", -12))
         pass
 
 

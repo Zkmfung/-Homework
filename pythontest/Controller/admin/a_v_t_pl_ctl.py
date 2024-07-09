@@ -1,7 +1,6 @@
-from shared_data import add_city
-from Views.admin.a_cty_addcty import Win
 class Controller:
-    ui: Win
+    # 导入UI类后，替换以下的 object 类型，将获得 IDE 属性提示功能
+    ui: object
 
     params: {}
 
@@ -16,12 +15,6 @@ class Controller:
         self.ui = ui
         # TODO 组件初始化 赋值操作
 
-    def addC(self, evt):
-        print("addCity:", evt)
-        cityname = self.ui.tk_input_lye5lfdi.get()
-        add_city(cityname)
-
-
-    def back_ti_acty(self, evt):
-        print("back:", evt)
+    def bk_to_train(self, evt):
+        print("bk_to_train:", evt)
         self.ui.destroy()

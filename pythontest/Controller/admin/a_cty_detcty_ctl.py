@@ -1,5 +1,7 @@
+from Views.admin.a_cty_detcty import Win
+from shared_data import delete_city
 class Controller:
-    ui: object
+    ui: Win
 
     params: {}
 
@@ -15,7 +17,10 @@ class Controller:
         # TODO 组件初始化 赋值操作
 
     def deleteC(self, evt):
-        print("<Button>事件未处理:", evt)
+        print("deletecity:", evt)
+        ctyname = self.ui.tk_input_lye5lfdi.get()
+        delete_city(ctyname)
+
 
     def back_ti_acty(self, evt):
         print("back:", evt)

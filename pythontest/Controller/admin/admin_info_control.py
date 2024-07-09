@@ -35,5 +35,4 @@ class Controller:
         a_plane_info.mainloop()
     def mainmenu(self, evt):
         print("mm:", evt)
-        self.params["login_ui"].deiconify
         self.ui.destroy()
