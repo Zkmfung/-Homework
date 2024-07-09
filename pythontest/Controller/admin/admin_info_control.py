@@ -4,6 +4,8 @@ from Views.admin.a_train import Win as a_train_Win
 from Controller.admin.a_train_control import Controller as a_train_Controller
 from Views.admin.a_plane import Win as a_plane_Win
 from Controller.admin.a_plane_ctl import Controller as a_plane_Controller
+
+
 class Controller:
 
     ui: a_city_Win

@@ -9,12 +9,13 @@ class WinGUI(Toplevel):
     def __init__(self):
         super().__init__()
         self.__win()
-        self.tk_button_viewcity = self.__tk_button_viewcity(self)
         self.tk_button_return_to_mm = self.__tk_button_return_to_mm(self)
-        self.tk_button_view_train_list = self.__tk_button_view_train_list(self)
-        self.tk_button_view_plane_list = self.__tk_button_view_plane_list(self)
-        self.tk_button_viewTrainRoute = self.__tk_button_viewTrainRoute(self)
-        self.tk_button_viewPlaneRoute = self.__tk_button_viewPlaneRoute(self)
+        self.tk_input_begincity = self.__tk_input_begincity(self)
+        self.tk_label_lyecezkk = self.__tk_label_lyecezkk(self)
+        self.tk_label_lyecf5bz = self.__tk_label_lyecf5bz(self)
+        self.tk_input_endcity = self.__tk_input_endcity(self)
+        self.tk_button_leasttime = self.__tk_button_leasttime(self)
+        self.tk_button_leastprice = self.__tk_button_leastprice(self)
 
     def __win(self):
         self.title("城市交通咨询系统（用户）")
@@ -73,34 +74,39 @@ class WinGUI(Toplevel):
         widget.configure(style=ctl)
         return ctl
 
-    def __tk_button_viewcity(self, parent):
-        btn = Button(parent, text="查看城市", takefocus=False, bootstyle="default outline")
-        btn.place(relx=0.3698, rely=0.0502, relwidth=0.2604, relheight=0.1405)
-        return btn
-
     def __tk_button_return_to_mm(self, parent):
-        btn = Button(parent, text="返回主菜单", takefocus=False, bootstyle="default")
+        btn = Button(parent, text="返回上一页", takefocus=False, bootstyle="default")
         btn.place(relx=0.4295, rely=0.8328, relwidth=0.1426, relheight=0.1003)
         return btn
 
-    def __tk_button_view_train_list(self, parent):
-        btn = Button(parent, text="查看火车时间/价格表", takefocus=False, bootstyle="default outline")
-        btn.place(relx=0.1128, rely=0.2274, relwidth=0.2604, relheight=0.1405)
+    def __tk_input_begincity(self, parent):
+        ipt = Entry(parent, bootstyle="default")
+        ipt.place(relx=0.4743, rely=0.1271, relwidth=0.2488, relheight=0.1003)
+        return ipt
+
+    def __tk_label_lyecezkk(self, parent):
+        label = Label(parent, text="出发城市", anchor="center", bootstyle="default")
+        label.place(relx=0.3118, rely=0.1271, relwidth=0.0829, relheight=0.1003)
+        return label
+
+    def __tk_label_lyecf5bz(self, parent):
+        label = Label(parent, text="到达城市", anchor="center", bootstyle="default")
+        label.place(relx=0.3118, rely=0.2910, relwidth=0.0829, relheight=0.1003)
+        return label
+
+    def __tk_input_endcity(self, parent):
+        ipt = Entry(parent, bootstyle="default")
+        ipt.place(relx=0.4743, rely=0.2910, relwidth=0.2488, relheight=0.1003)
+        return ipt
+
+    def __tk_button_leasttime(self, parent):
+        btn = Button(parent, text="最短时间", takefocus=False, bootstyle="default")
+        btn.place(relx=0.2703, rely=0.5686, relwidth=0.1559, relheight=0.1003)
         return btn
 
-    def __tk_button_view_plane_list(self, parent):
-        btn = Button(parent, text="查看飞机时间/价格表", takefocus=False, bootstyle="default outline")
-        btn.place(relx=0.6186, rely=0.2274, relwidth=0.2604, relheight=0.1405)
-        return btn
-
-    def __tk_button_viewTrainRoute(self, parent):
-        btn = Button(parent, text="查看火车线路", takefocus=False, bootstyle="default outline")
-        btn.place(relx=0.1128, rely=0.5351, relwidth=0.2604, relheight=0.1405)
-        return btn
-
-    def __tk_button_viewPlaneRoute(self, parent):
-        btn = Button(parent, text="查看飞机线路", takefocus=False, bootstyle="default outline")
-        btn.place(relx=0.6186, rely=0.5351, relwidth=0.2604, relheight=0.1405)
+    def __tk_button_leastprice(self, parent):
+        btn = Button(parent, text="最低价格", takefocus=False, bootstyle="default")
+        btn.place(relx=0.5887, rely=0.5686, relwidth=0.1559, relheight=0.1003)
         return btn
 
 
@@ -113,22 +119,18 @@ class Win(WinGUI):
         self.ctl.init(self)
 
     def __event_bind(self):
-        self.tk_button_viewcity.bind('<Button>', self.ctl.u_viewCity)
-        self.tk_button_return_to_mm.bind('<Button>', self.ctl.mainmenu)
-        self.tk_button_view_train_list.bind('<Button>', self.ctl.view_train_list)
-        self.tk_button_view_plane_list.bind('<Button>', self.ctl.view_plane_list)
-        self.tk_button_viewTrainRoute.bind('<Button>', self.ctl.view_train_rt)
-        self.tk_button_viewPlaneRoute.bind('<Button>', self.ctl.view_plane_rt)
+        self.tk_button_return_to_mm.bind('<Button>', self.ctl.bk)
+        self.tk_button_leasttime.bind('<Button>', self.ctl.leasttime)
+        self.tk_button_leastprice.bind('<Button>', self.ctl.leastprice)
         pass
 
     def __style_config(self):
         sty = Style()
-        sty.configure(self.new_style(self.tk_button_viewcity), font=("微软雅黑", -12))
         sty.configure(self.new_style(self.tk_button_return_to_mm), font=("微软雅黑", -12))
-        sty.configure(self.new_style(self.tk_button_view_train_list), font=("微软雅黑", -12))
-        sty.configure(self.new_style(self.tk_button_view_plane_list), font=("微软雅黑", -12))
-        sty.configure(self.new_style(self.tk_button_viewTrainRoute), font=("微软雅黑", -12))
-        sty.configure(self.new_style(self.tk_button_viewPlaneRoute), font=("微软雅黑", -12))
+        sty.configure(self.new_style(self.tk_label_lyecezkk), font=("微软雅黑", -12))
+        sty.configure(self.new_style(self.tk_label_lyecf5bz), font=("微软雅黑", -12))
+        sty.configure(self.new_style(self.tk_button_leasttime), font=("微软雅黑", -12))
+        sty.configure(self.new_style(self.tk_button_leastprice), font=("微软雅黑", -12))
         pass
 
 
